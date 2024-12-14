@@ -13,7 +13,9 @@ export default function MyJobs() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/user-jobs/${user?.email}`)
+      .get(
+        `https://job-portal-server-five-liart.vercel.app/user-jobs/${user?.email}`
+      )
       .then((data) => setPostedJob(data.data))
       .finally(() => {
         setLoading(false); // End loading
@@ -31,17 +33,19 @@ export default function MyJobs() {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/jobs/${id}`).then((data) => {
-          if (data.data.deletedCount) {
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-            });
-            const remaining = postedJob.filter((job) => job._id !== id);
-            setPostedJob(remaining);
-          }
-        });
+        axios
+          .delete(`https://job-portal-server-five-liart.vercel.app/jobs/${id}`)
+          .then((data) => {
+            if (data.data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+              const remaining = postedJob.filter((job) => job._id !== id);
+              setPostedJob(remaining);
+            }
+          });
       }
     });
   };

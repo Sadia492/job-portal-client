@@ -4,7 +4,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 export default function JobDetails() {
   const { _id, title, company, applicationDeadline } = useLoaderData();
-  //   console.log(data);
+
   const isDeadlinePassed = () => {
     const currentDate = new Date();
     const deadlineDate = new Date(applicationDeadline);

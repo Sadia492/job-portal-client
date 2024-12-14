@@ -11,7 +11,9 @@ export default function MyApplication() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/user-applications/${user?.email}`)
+      .get(
+        `https://job-portal-server-five-liart.vercel.app/user-applications/${user?.email}`
+      )
       .then((data) => setApplicantJob(data.data))
       .finally(() => {
         setLoading(false); // End loading
@@ -29,7 +31,9 @@ export default function MyApplication() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/applications/${id}`)
+          .delete(
+            `https://job-portal-server-five-liart.vercel.app/applications/${id}`
+          )
           .then((data) => {
             if (data.data.deletedCount) {
               Swal.fire({

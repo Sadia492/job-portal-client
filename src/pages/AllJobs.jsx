@@ -11,7 +11,9 @@ export default function AllJobs() {
   const handleSearch = (e) => {
     const title = e.target.value;
     axios
-      .get(`http://localhost:5000/jobs?title=${title}`)
+      .get(
+        `https://job-portal-server-five-liart.vercel.app/jobs?title=${title}`
+      )
       .then((data) => setJobs(data.data));
   };
   const sortJobs = (order) => {
@@ -30,7 +32,9 @@ export default function AllJobs() {
   const handleJobType = (e) => {
     const jobType = e.target.value;
     axios
-      .get(`http://localhost:5000/jobs?jobType=${jobType}`)
+      .get(
+        `https://job-portal-server-five-liart.vercel.app/jobs?jobType=${jobType}`
+      )
       .then((data) => setJobs(data.data));
   };
 

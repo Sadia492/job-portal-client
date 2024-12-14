@@ -22,15 +22,17 @@ export default function AddJobs() {
       applicants_count: 0,
       status: "active",
     };
-    axios.post("http://localhost:5000/jobs", data).then((data) => {
-      if (data.data.insertedId) {
-        Swal.fire({
-          title: "Added",
-          text: "Added successfully",
-          icon: "success",
-        });
-      }
-    });
+    axios
+      .post("https://job-portal-server-five-liart.vercel.app/jobs", data)
+      .then((data) => {
+        if (data.data.insertedId) {
+          Swal.fire({
+            title: "Added",
+            text: "Added successfully",
+            icon: "success",
+          });
+        }
+      });
   };
   return (
     <div>

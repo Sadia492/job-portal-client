@@ -19,7 +19,10 @@ export default function ApplicationCard({ application }) {
       status: e.target.value,
     };
     axios
-      .patch(`http://localhost:5000/applications/${id}`, data)
+      .patch(
+        `https://job-portal-server-five-liart.vercel.app/applications/${id}`,
+        data
+      )
       .then((data) => {
         if (data.data.modifiedCount) {
           Swal.fire({

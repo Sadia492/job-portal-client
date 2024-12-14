@@ -39,16 +39,18 @@ export default function Update() {
       applicants_count: 0,
       status: "active",
     };
-    axios.put(`http://localhost:5000/jobs/${_id}`, data).then((data) => {
-      if (data.data.modifiedCount) {
-        Swal.fire({
-          title: "Updated",
-          text: "Updated successfully",
-          icon: "success",
-        });
-        navigate(`/jobDetails/${_id}`);
-      }
-    });
+    axios
+      .put(`https://job-portal-server-five-liart.vercel.app/jobs/${_id}`, data)
+      .then((data) => {
+        if (data.data.modifiedCount) {
+          Swal.fire({
+            title: "Updated",
+            text: "Updated successfully",
+            icon: "success",
+          });
+          navigate(`/jobDetails/${_id}`);
+        }
+      });
   };
 
   return (

@@ -20,15 +20,12 @@ export default function Register() {
     createUser(email, password)
       .then((result) => {
         updateUser({ displayName: name, photoURL: photo })
-          .then(() => {
-          })
-          .catch((error) => );
+          .then(() => {})
+          .catch((error) => {});
         setUser(result.user);
         navigate("/");
       })
-      .catch((error) => {
-
-      });
+      .catch((error) => {});
   };
 
   return (

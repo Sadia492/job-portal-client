@@ -6,7 +6,7 @@ export default function AvailableJobs() {
   const [jobs, setJobs] = useState();
   useEffect(() => {
     axios
-      .get("http://localhost:5000/availableJobs")
+      .get("https://job-portal-server-five-liart.vercel.app/availableJobs")
       .then((data) => setJobs(data.data));
   }, []);
 

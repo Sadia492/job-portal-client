@@ -9,7 +9,9 @@ export default function ReviewApplication() {
   const { id } = useParams();
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/applications/jobs/${id}`)
+      .get(
+        `https://job-portal-server-five-liart.vercel.app/applications/jobs/${id}`
+      )
       .then((data) => setApplications(data.data));
   }, []);
 

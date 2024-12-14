@@ -16,15 +16,20 @@ export default function JobApply() {
       applicant_email: user.email,
       ...initialData,
     };
-    axios.post("http://localhost:5000/applications", data).then((data) => {
-      if (data.data.insertedId) {
-        Swal.fire({
-          title: "Added",
-          text: "Added successfully",
-          icon: "success",
-        });
-      }
-    });
+    axios
+      .post(
+        "https://job-portal-server-five-liart.vercel.app/applications",
+        data
+      )
+      .then((data) => {
+        if (data.data.insertedId) {
+          Swal.fire({
+            title: "Added",
+            text: "Added successfully",
+            icon: "success",
+          });
+        }
+      });
   };
   return (
     <div className="card bg-base-100 w-full shadow-2xl">
