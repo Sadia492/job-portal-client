@@ -14,6 +14,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 import auth from "../firebase/firebase.config";
+import axios from "axios";
 
 export const authContext = createContext();
 
@@ -23,7 +24,7 @@ const facebookProvider = new FacebookAuthProvider();
 const twitterProvider = new TwitterAuthProvider();
 
 export default function AuthProvider({ children }) {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const createUser = (email, password) => {
@@ -62,7 +63,26 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
+      if (currentUser?.email) {
+        const user = { email: currentUser.email };
+        axios
+          .post("https://job-portal-server-five-liart.vercel.app/jwt", user, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            setLoading(false);
+          });
+      } else {
+        axios
+          .post(
+            "https://job-portal-server-five-liart.vercel.app/logout",
+            {},
+            { withCredentials: true }
+          )
+          .then((res) => {
+            setLoading(false);
+          });
+      }
     });
     return () => {
       unsubscribe();

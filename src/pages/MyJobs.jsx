@@ -4,19 +4,20 @@ import axios from "axios";
 import { FaEye, FaPen, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import UseAxiosSecure from "../hooks/UseAxiosSecure";
 
 export default function MyJobs() {
   const { user } = useAuth();
+  // const axiosSecure =
   const [postedJob, setPostedJob] = useState();
   const [loading, setLoading] = useState(false);
-
+  const axiosSecure = UseAxiosSecure();
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(
-        `https://job-portal-server-five-liart.vercel.app/user-jobs/${user?.email}`
-      )
+    axiosSecure
+      .get(`/user-jobs/${user?.email}`)
       .then((data) => setPostedJob(data.data))
+      .catch((err) => console.log(err))
       .finally(() => {
         setLoading(false); // End loading
       });

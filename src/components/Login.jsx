@@ -4,6 +4,7 @@ import registerAnimation from "../assets/register.json";
 import useAuth from "../hooks/UseAuth";
 import SocialAuth from "../SocialAuth/SocialAuth";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
   const { signInUser, setUser } = useAuth();
@@ -18,6 +19,7 @@ export default function Login() {
     signInUser(email, password)
       .then((result) => {
         setUser(result.user);
+
         navigate(location.state || "/");
       })
       .catch((error) => {});
