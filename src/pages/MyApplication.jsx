@@ -3,17 +3,17 @@ import useAuth from "../hooks/UseAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { div } from "motion/react-client";
+import UseAxiosSecure from "../hooks/UseAxiosSecure";
 
 export default function MyApplication() {
   const { user } = useAuth();
   const [applicantJob, setApplicantJob] = useState();
   const [loading, setLoading] = useState(false);
+  const axiosSecure = UseAxiosSecure();
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(
-        `https://job-portal-server-five-liart.vercel.app/user-applications/${user?.email}`
-      )
+    axiosSecure
+      .get(`/user-applications/${user?.email}`)
       .then((data) => setApplicantJob(data.data))
       .finally(() => {
         setLoading(false); // End loading
